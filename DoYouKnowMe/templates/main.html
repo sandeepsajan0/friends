@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    
+	    {% block head %}
+        <title>
+        Hey Friends!
+        </title> 
+        {% endblock %}
+    </head>
+    
+    <body>
+    
+    <div class="container">
+        <div class="navbar" style="background-color:red;">
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <li><a href="/friends/">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">My Groups<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="group_1/">Group 1</a></li>
+                        <li><a href="group_2/">Group 2</a></li>
+                        <li><a href="group_3/">Group 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="/friends/open_messages/">Open Messages</a></li>
+                <li><a href="/friends/profile/">Profile</a></li>
+                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/friends/create_group/" align="right"> +Create Group</a></li>
+            </ul>
+            {% else %}
+            <ul class="nav navbar-nav">
+                <li><a href="/friends/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/friends/register/">Register</a></li>
+                <li><a href="/friends/login/">Login</a></li>
+            {% endif %}
+        </div>
+    </div>
+    {% block body %}
+    <h1>Yess Bosss!</h1>
+    <h3> Here is the anonymous friends app. You have to find who have done this message and challage to your friend and know your friend more closely.</h3>
+    {% endblock %}
+    </body>
+
+</html>

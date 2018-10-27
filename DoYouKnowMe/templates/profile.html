@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block head %}
+<title>
+Profile Page!
+</title>
+{% endblock %}
+
+{% block body %}
+<h1>Profile</h1>
+<h3>
+<b>name:</b><i>{{user}}</i></br>
+<b>email:</b><i>{{user.email}}</i></br>
+</h3>
+<a href="http://127.0.0.1:8000/friends/logout" class="btn btn-default">Logout</a>
+
+Here is your profile.
+{% endblock %}

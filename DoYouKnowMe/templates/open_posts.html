@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block body %}
+      {% for post in object_list %}
+      <div class="post-entry">
+        
+        <h3>{{ post.text }}</h3>
+        <p><b><i>{{ post.date_added}}</i></b></p>
+      </div>
+      {% endfor %}    
+    
+    
+<!--<!--  New post  -->
+    <h1>New post</h1>
+    
+
+    <form action="" method="post">{% csrf_token %}
+     {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %} 
+       
+        <input type="submit" value="Save" />
+       
+    </form>
+
+<!--<div class="container">-->
+<!--   <h1>Home</h1>-->
+<!--   <form method="post">-->
+<!--   {% csrf_token %}-->
+<!--   {{ form.as_p }}-->
+<!--   -->
+<!--   <button type="submit">Submit</button>-->
+<!--   </form>-->
+<!--   {% for elt in some %}-->
+<!--   <h2>{{ elt.text }}</h2>-->
+<!--   {% endfor %}-->
+<!--</div>-->
+
+{% endblock %}
