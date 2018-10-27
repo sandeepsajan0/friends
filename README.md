@@ -1,4 +1,4 @@
-#friends
+# friends
 It is a anonymous chat app. You can chat with your friends in closed group but you can not see the name message sender. You have to guess the name of friend and talk to him. It improves your understanding in friends.
 
 ## how to use locally
