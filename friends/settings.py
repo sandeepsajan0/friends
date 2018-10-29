@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LOGIN_REDIRECT_URL = '/friends/profile'
+LOGIN_REDIRECT_URL = '/friends/user/profile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

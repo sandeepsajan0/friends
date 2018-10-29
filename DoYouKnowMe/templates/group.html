@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block head %}
+<title>
+{{group.name}}
+</title>
+{% endblock %}
+{% block body %}
+<h1>GroupName: {{group.name}}</h1>
+<b>{{group.users}}</b>
+{% endblock %}

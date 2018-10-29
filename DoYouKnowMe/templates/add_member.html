@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block body %}
+
+<form action="" method="post">
+{% csrf_token %}
+<input name="gp_name" type="text" class="form-control"/>
+<input name="member" type="text" class="form-control"/>
+<button type="submit">Submit</button>
+</form>
+{% endblock %}

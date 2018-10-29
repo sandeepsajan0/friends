@@ -17,6 +17,19 @@ class Post(models.Model):
         return u'%s %s %s %s' % (self.text, self.date_added,self.author,self.author_name)
 
 
+    
+class Group(models.Model):
+    name=models.CharField(max_length=200)
+    users = models.ManyToManyField(User)
+
+
+
+class GroupForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = ("name",)
+
+
 class PostForm(ModelForm):
     class Meta:
         model = Post

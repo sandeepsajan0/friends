@@ -1,22 +1,55 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import PostForm, Post
+from .models import PostForm, Post, RegistrationForm, GroupForm, Group
 from django.views.generic import TemplateView
-from django.views.generic.edit import FormMixin
-from django.shortcuts import render_to_response
 from django.template import RequestContext
-from .models import RegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from time import gmtime, strftime
+import datetime
+from django.contrib.auth.models import User
 
 # Create your views here.
 def firstview(request):
-    return render(request, 'main.html')
+    return render(request, 'base.html')
+
+@login_required
+def HomePage(request):
+    groups = Group.objects.filter(users=request.user)
+    return render(request, 'main.html',{'groups':groups})
+
+def show_groups(request,pk=None):
+    group = Group.objects.get(pk=pk)
+    print(group.name)
+    return render(request, 'group.html',{'group':group})
 
 @login_required
 def CreateGroup(request):
-    return HttpResponse("create gp form")
+    template_name = "create_group.html"
+    form = GroupForm()
+    if request.method=='POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            gp = form.save(commit=False)
+            gp.save()
+            gp.users.add(request.user)
+            gp.save()
+            form = GroupForm()
+    return render(request,template_name,{'form':form})
+
+
+@login_required
+def add_member(request):
+    template_name = "add_member.html"
+    if request.method=='POST':
+        gp_name = request.POST.get('gp_name',None)
+        member = request.POST.get('member',None)
+        group = Group.objects.get(name=gp_name)
+        user_name=User.objects.get(username=member)
+        group.users.add(user_name)
+        return redirect('/friends/user/group/add_member/')
+    else:
+        return render(request,template_name)
+    
 
 @login_required
 def openMessages(request):
@@ -27,7 +60,7 @@ def openMessages(request):
     if request.method=='POST':
         form=PostForm(request.POST)
         if form.is_valid():
-            curr_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            curr_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             items = form.save(commit = False)
             items.author = request.user
             items.author_name = request.user.username
@@ -58,19 +91,4 @@ class Profile(TemplateView):
     @method_decorator(login_required)
     def get(self,request):
         return render(request,self.template_name)      
-#class openMessages(TemplateView):
-#    template_name='open_posts.html'
-#    
-#    def get(self, request):
-#        form=PostForm()
-#        return render(request, self.template_name, {'form':form})
-#        
-#    def post(self, request):
-#        form=PostForm(request.POST)
-#        if form.is_valid():
-#            form.save()
-#            form = PostForm()
-#        some = Post.objects.all()
-#        args = {'form':form, 'some':some}
-#        return render(request,self.template_name,args)
-#     
+
