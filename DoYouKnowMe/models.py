@@ -10,11 +10,12 @@ class Post(models.Model):
     text = models.CharField(max_length=500)
     date_added = models.DateTimeField('date published', default=timezone.now)
     author_name = models.CharField(max_length=200,default=author)
+    group_name =models.CharField(max_length=100,default=None,blank=True)
     def get_absolute_url(self):
 	    return reverse('post_list')
     
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.text, self.date_added,self.author,self.author_name)
+        return u'%s %s %s %s %s' % (self.text, self.date_added,self.author,self.author_name,self.group_name)
 
 
     

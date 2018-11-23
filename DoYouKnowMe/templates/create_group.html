@@ -1,13 +1,15 @@
 {% extends 'main.html' %}
 {% block body %}
-<form action="" method="post">
-{% csrf_token %}
-{% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.label_tag }} {{ field }}
-    </div>
-{% endfor %} 
-<input type="submit" value="Save" />
-<a href="/friends/user/group/add_member/" class="btn btn-info">Add Member</a>
-</form>
+<div class = "container">
+    <form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %} 
+    <input type="submit" value="Save" />
+    <a href="/friends/user/group/add_member/" class="btn btn-info">Add Member</a>
+    </form>
+</div>
 {% endblock %}

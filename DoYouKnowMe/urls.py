@@ -16,4 +16,11 @@ urlpatterns = [
     url(r'^logout/$',LogoutView.as_view(template_name='logout.html')),
     url(r'^user/profile/$',views.Profile.as_view()),
     url(r'^user/group/add_member/$', views.add_member, name="add_member"),
+
+    url(r'^logoutuser/$',views.Logout_View.as_view()),
+    url(r'^loginuser/$', views.Login_View.as_view()),
+    url(r'^addpost/$', views.OpenPostAdd.as_view()),
+    url(r'^post/(?P<pk>[0-9]+)/$', views.OpenPostDetail.as_view()),
+    url(r'^registeruser/$', views.RegisterUser.as_view()),
+    url(r'^userprofile/$', views.ProfileView.as_view())
 ]
